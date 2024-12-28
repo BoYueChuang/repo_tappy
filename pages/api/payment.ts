@@ -14,18 +14,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 currency: 'TWD',
                 details: '支付測試',
                 cardholder,
-            },
-                {
-                    headers: {
-                        'x-api-key': 'partner_eLf8pDLmW1lEw414jVd9rSrIQAtaqMNX8utjgOMWgPXNyHoD4dviFIx2', // 設置 x-api-key
-                    }
-                });
+            }, {
+                headers: {
+                    'x-api-key': 'partner_eLf8pDLmW1lEw414jVd9rSrIQAtaqMNX8utjgOMWgPXNyHoD4dviFIx2', // 設置 x-api-key
+                }
+            });
 
             res.status(200).json(response.data);
         } catch (error) {
             res.status(500).json({ error: error.response?.data || '未知錯誤' });
-        }
+        };
     } else {
         res.status(405).json({ error: 'Method Not Allowed' });
-    }
+    };
 }

@@ -41,7 +41,8 @@ const PaymentPage = () => {
         }
     }, []);
 
-    const handleSubmit = () => {
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault(); // 防止表單的默認提交行為
         const tappayStatus = TPDirect.card.getTappayFieldsStatus();
         console.log(tappayStatus);
 
@@ -62,23 +63,43 @@ const PaymentPage = () => {
                     cardholder: {
                         name: 'John Doe',
                         email: 'john.doe@example.com',
-                        phone_number: '0912345678' // 必填欄位：手機號碼
+                        phone_number: '0912345678', // 必填欄位：手機號碼
                     },
                 }),
             })
                 .then((res) => res.json())
-                .then((data) => alert(data + '交易成功！'))
+                .then(() => alert('交易成功！'))
                 .catch((err) => alert('交易失敗：' + err.message));
         });
     };
 
+
     return (
-        <div>
-            <h1>支付頁面</h1>
-            <div id="card-number"></div>
-            <div id="card-expiration-date"></div>
-            <div id="card-ccv"></div>
-            <button onClick={handleSubmit}>提交支付</button>
+        <div className="container">
+            <form onSubmit={handleSubmit}>
+                <div className="form-group card-number-group">
+                    <label htmlFor="card-number" className="control-label">
+                        <span id="cardtype"></span>卡號
+                    </label>
+                    <div className="form-control" id="card-number"></div>
+                </div>
+                <div className="form-group expiration-date-group">
+                    <label htmlFor="expiration-date" className="control-label">
+                        卡片到期日
+                    </label>
+                    <div className="form-control" id="card-expiration-date"></div>
+                </div>
+                <div className="form-group ccv-group">
+                    <label htmlFor="ccv" className="control-label">
+                        卡片後三碼
+                    </label>
+                    <div className="form-control ccv" id="card-ccv"></div>
+                </div>
+
+                <button type="submit" className="btn btn-default">
+                    Pay
+                </button>
+            </form>
         </div>
     );
 };
