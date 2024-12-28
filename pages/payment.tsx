@@ -1,17 +1,26 @@
 import { useEffect } from 'react';
-declare var TPDirect: any;
+type TPDirectType = {
+    setupSDK: (appId: string, appKey: string, env: 'sandbox' | 'production') => void;
+    card: {
+        setup: (options: any) => void;
+        getTappayFieldsStatus: () => { canGetPrime: boolean; hasError: boolean };
+        getPrime: (callback: (result: any) => void) => void;
+    };
+};
+
+declare let TPDirect: TPDirectType;
 declare global {
     interface Window {
-        TPDirect: any;
+        TPDirect: TPDirectType;
     }
-};
+}
 
 const PaymentPage = () => {
     useEffect(() => {
         if (typeof window !== 'undefined' && window.TPDirect) {
             TPDirect.setupSDK(
-                process.env.TAPPAY_APP_ID,
-                process.env.TAPPAY_APP_KEY,
+                process.env.TAPPAY_APP_ID || '',
+                process.env.TAPPAY_APP_KEY || '',
                 'sandbox' // 或 'production'
             );
 
@@ -58,7 +67,7 @@ const PaymentPage = () => {
                 }),
             })
                 .then((res) => res.json())
-                .then((data) => alert('交易成功！'))
+                .then((data) => alert(data + '交易成功！'))
                 .catch((err) => alert('交易失敗：' + err.message));
         });
     };

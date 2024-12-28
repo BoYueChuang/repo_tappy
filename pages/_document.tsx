@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import Document, { DocumentContext, DocumentInitialProps } from 'next/document';
+import Script from 'next/script';
 
 class MyDocument extends Document {
     static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
@@ -11,8 +12,11 @@ class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    {/* TapPay SDK */}
-                    <script src="https://js.tappaysdk.com/tpdirect/v5.11.0"></script>
+                    {/* 非同步加載 TapPay SDK */}
+                    <Script
+                        src="https://js.tappaysdk.com/tpdirect/v5.11.0"
+                        strategy="beforeInteractive"
+                    />
                 </Head>
                 <body>
                     <Main />
