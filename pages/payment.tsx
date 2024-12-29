@@ -50,7 +50,7 @@ const PaymentPage = () => {
             if (result.status !== 0) {
                 alert('取得 Prime 失敗：' + result.msg);
                 return;
-            }
+            };
 
             alert('Prime 取得成功：' + result.card.prime);
             // 傳送至後端 API
@@ -75,25 +75,19 @@ const PaymentPage = () => {
 
 
     return (
-        <div className="container">
+        <div className="container" style={{ marginTop: '20px' }}>
             <form onSubmit={handleSubmit}>
-                <div className="form-group card-number-group">
-                    <label htmlFor="card-number" className="control-label">
-                        <span id="cardtype"></span>卡號
-                    </label>
+                <div className="form-group">
+                    <label>卡號</label>
                     <div className="form-control" id="card-number"></div>
                 </div>
-                <div className="form-group expiration-date-group">
-                    <label htmlFor="expiration-date" className="control-label">
-                        卡片到期日
-                    </label>
+                <div className="form-group">
+                    <label>卡片到期日</label>
                     <div className="form-control" id="card-expiration-date"></div>
                 </div>
-                <div className="form-group ccv-group">
-                    <label htmlFor="ccv" className="control-label">
-                        卡片後三碼
-                    </label>
-                    <div className="form-control ccv" id="card-ccv"></div>
+                <div className="form-group">
+                    <label>卡片後三碼</label>
+                    <div className="form-control" id="card-ccv"></div>
                 </div>
 
                 <button type="submit" className="btn btn-default">
