@@ -8,7 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const response = await axios.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime', {
                 prime,
+                // 帳號金鑰(Partner Key)
                 partner_key: process.env.TAPPAY_PARTNER_KEY,
+                // 商家 ID
                 merchant_id: process.env.TAPPAY_MERCHANT_ID,
                 amount,
                 currency: 'TWD',
@@ -16,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 cardholder,
             }, {
                 headers: {
-                    'x-api-key': 'partner_eLf8pDLmW1lEw414jVd9rSrIQAtaqMNX8utjgOMWgPXNyHoD4dviFIx2', // 設置 x-api-key
+                    'x-api-key': process.env.TAPPAY_PARTNER_KEY,
                 }
             });
 

@@ -19,7 +19,9 @@ const PaymentPage = () => {
     useEffect(() => {
         if (typeof window !== 'undefined' && window.TPDirect) {
             TPDirect.setupSDK(
+                // App ID
                 process.env.TAPPAY_APP_ID || '',
+                // App KEY
                 process.env.TAPPAY_APP_KEY || '',
                 'sandbox' // 或 'production'
             );
