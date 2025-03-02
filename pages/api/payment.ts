@@ -2,6 +2,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
+    // 設置 CORS 頭部
+    res.setHeader('Access-Control-Allow-Origin', '*'); // 允許所有域名進行跨域請求
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // 允許的 HTTP 方法
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key'); // 允許的標頭
+
     if (req.method === 'POST') {
         const { prime, amount, cardholder } = req.body;
 
