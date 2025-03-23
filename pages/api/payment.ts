@@ -29,7 +29,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 },
                 {
                     headers: {
-                        'x-api-key': process.env.TAPPAY_PARTNER_KEY,
                         'Content-Type': 'application/json',
                     },
                 }
