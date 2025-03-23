@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         try {
             const response = await axios.post(
-                'https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime',
+                'https://prod.tappaysdk.com/tpc/payment/pay-by-prime',
                 {
                     prime,
                     partner_key: process.env.TAPPAY_PARTNER_KEY,
