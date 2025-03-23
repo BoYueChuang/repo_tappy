@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             res.status(200).json(response.data);
         } catch (error: any) {
-            res.status(500).json({ error: error.response?.data || '未知錯誤' });
+            res.status(500).json({ error: error || '未知錯誤' });
         }
     } else {
         res.status(405).json({ error: 'Method Not Allowed' });
